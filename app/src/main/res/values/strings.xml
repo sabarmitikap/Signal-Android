@@ -2278,10 +2278,15 @@
     <string name="preferences__keep_messages">Keep messages</string>
     <string name="preferences__clear_message_history">Clear message history</string>
     <string name="preferences__linked_devices">Linked devices</string>
+
+    <!-- Modifikasi Penambahan Warna Tema - Sabar Muhamad Itikap -->
     <string name="preferences__light_theme">Light</string>
     <string name="preferences__dark_theme">Dark</string>
     <string name="preferences__appearance">Appearance</string>
+    <string name="preferences__pink_theme">Pink</string>
+    <string name="preferences__green_theme">Green</string>
     <string name="preferences__theme">Theme</string>
+
     <string name="preferences__chat_wallpaper">Chat wallpaper</string>
     <string name="preferences__disable_pin">Disable PIN</string>
     <string name="preferences__enable_pin">Enable PIN</string>
@@ -2587,6 +2592,7 @@
     <string name="conversation_callable_secure__menu_call">Signal call</string>
     <string name="conversation_callable_secure__menu_video">Signal video call</string>
 
+    <!-- Modifikasi Penambahan Count Words - Sabar Muhamad Itikap -->
     <!-- conversation_context -->
     <string name="conversation_context__menu_message_details">Message details</string>
     <string name="conversation_context__menu_copy_text">Copy text</string>
@@ -2594,6 +2600,7 @@
     <string name="conversation_context__menu_forward_message">Forward message</string>
     <string name="conversation_context__menu_resend_message">Resend message</string>
     <string name="conversation_context__menu_reply_to_message">Reply to message</string>
+    <string name="conversation_context__menu_count_words">Count the words</string>
 
     <!-- conversation_context_reacction -->
     <string name="conversation_context__reaction_multi_select">Select multiple</string>
@@ -2740,6 +2747,16 @@
         <item quantity="one">PIN must be at least %1$d digit</item>
         <item quantity="other">PIN must be at least %1$d digits</item>
     </plurals>
+
+    <!-- Count Words - Sabar Muhamad Itikap -->
+    <plurals name="ConversationFragment_count_selected_messages">
+        <item quantity="one">Hitung Text Ini??</item>
+        <item quantity="other">Hitung Text Ini??</item>
+    </plurals>
+
+    <!-- Count Words - Sabar Muhamad Itikap -->
+    <string name="ConversationFragment_count_words">Yes, Hitung Saja</string>
+
     <string name="CreateKbsPinFragment__create_a_new_pin">Create a new PIN</string>
     <string name="CreateKbsPinFragment__you_can_choose_a_new_pin_as_long_as_this_device_is_registered">You can change your PIN as long as this device is registered.</string>
     <string name="CreateKbsPinFragment__create_your_pin">Create your PIN</string>

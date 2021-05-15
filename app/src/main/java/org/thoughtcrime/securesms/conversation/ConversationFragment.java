@@ -17,6 +17,8 @@
 package org.thoughtcrime.securesms.conversation;
 
 import android.Manifest;
+import static org.webrtc.ContextUtils.getApplicationContext;
+import com.google.common.base.CaseFormat;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipData;
@@ -790,6 +792,57 @@ public class ConversationFragment extends LoggingFragment {
     if (!TextUtils.isEmpty(bodyBuilder)) {
       clipboard.setPrimaryClip(ClipData.newPlainText(null, bodyBuilder));
     }
+  }
+
+  // Count Words - Sabar Muhamad Itikap (Modif Yang Bima)
+  // Handle Pin Messages - Bima Putra S
+  private void handlePinMessages(final Set<ConversationMessage> conversationMessages) {
+    Set<MessageRecord> messageRecordsPin = Stream.of(conversationMessages).map(ConversationMessage::getMessageRecord).collect(Collectors.toSet());
+    buildRemotePinConfirmationDialog(messageRecordsPin).show();
+  }
+
+  // Count Words - Sabar Muhamad Itikap (Modif Yang Bima)
+  // Handle Pin Alert Dialog - Bima Putra S
+  private AlertDialog.Builder buildRemotePinConfirmationDialog(Set<MessageRecord> messageRecords) {
+    Context             context       = requireActivity();
+    int                 messagesCount = messageRecords.size();
+    AlertDialog.Builder builder       = new AlertDialog.Builder(getActivity());
+
+    builder.setTitle(getActivity().getResources().getQuantityString(R.plurals.ConversationFragment_count_selected_messages, messagesCount, messagesCount));
+    builder.setCancelable(true);
+
+    builder.setPositiveButton(R.string.ConversationFragment_count_words, (dialog, which) -> {
+      // Show ID Message for Data.
+      for (MessageRecord messageRecord : messageRecords) {
+        Context con = getApplicationContext();
+        int duration = 4000;
+        StringBuffer c = new StringBuffer(messageRecord.getBody().toString());
+        int vCount = 0, cCount = 0;
+
+        //Converting entire string to lower case to reduce the comparisons
+        c = c.reverse();
+
+        for(int i = 0; i < c.length(); i++) {
+          //Checks whether a character is a vowel
+          if(c.charAt(i) == 'a' || c.charAt(i) == 'e' || c.charAt(i) == 'i' || c.charAt(i) == 'o' || c.charAt(i) == 'u') {
+            //Increments the vowel counter
+            vCount++;
+          }
+          //Checks whether a character is a consonant
+          else if(c.charAt(i) >= 'a' && c.charAt(i)<='z') {
+            //Increments the consonant counter
+            cCount++;
+          }
+        }
+        Toast toast = Toast.makeText(con, String.valueOf(c.reverse()) + "\nJumlah Vokal: " + vCount + "\nJumlah Konsonan: " + cCount, duration);
+        //Toast toast = Toast.makeText(con, String.valueOf(c.toLowerCase()) + "\nJumlah Konsonan: " + cCount, duration);
+        toast.show();
+      }
+      //nothing
+    });
+
+    builder.setNegativeButton(android.R.string.cancel, null);
+    return builder;
   }
 
   private void handleDeleteMessages(final Set<ConversationMessage> conversationMessages) {
@@ -1722,6 +1775,8 @@ public class ConversationFragment extends LoggingFragment {
         case R.id.action_multiselect: handleEnterMultiSelect(conversationMessage);                                          return true;
         case R.id.action_forward:     handleForwardMessage(conversationMessage);                                            return true;
         case R.id.action_download:    handleSaveAttachment((MediaMmsMessageRecord) conversationMessage.getMessageRecord()); return true;
+        //case R.id.action_pin_msg:     handlePinMessages(SetUtil.newHashSet(conversationMessage));                         return true;
+        case R.id.action_countwords:     handlePinMessages(SetUtil.newHashSet(conversationMessage));                        return true;
         default:                                                                                                            return false;
       }
     }

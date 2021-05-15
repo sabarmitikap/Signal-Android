@@ -44,4 +44,10 @@
         android:title="@string/conversation_context__menu_forward_message"
         app:iconTint="@color/signal_icon_tint_primary"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_countwords"
+        android:icon="@drawable/ic_forward_24"
+        android:title="@string/conversation_context__menu_count_words"
+        app:iconTint="@color/signal_icon_tint_primary"
+        app:showAsAction="ifRoom" />
 </menu>
